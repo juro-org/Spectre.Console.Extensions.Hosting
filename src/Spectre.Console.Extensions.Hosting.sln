@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Console.Extensions.Hosting", "Spectre.Console.Extensions.Hosting\Spectre.Console.Extensions.Hosting.csproj", "{393F1934-6189-488F-BF2F-1CE0F36BD4C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingleCommand", "Samples\SingleCommand\SingleCommand.csproj", "{9E78FF2B-AABC-48D2-B959-95F2BB1F5DA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{3EEF9DAB-A839-40AB-B67A-54A88D753B21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{393F1934-6189-488F-BF2F-1CE0F36BD4C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{393F1934-6189-488F-BF2F-1CE0F36BD4C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{393F1934-6189-488F-BF2F-1CE0F36BD4C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{393F1934-6189-488F-BF2F-1CE0F36BD4C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E78FF2B-AABC-48D2-B959-95F2BB1F5DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E78FF2B-AABC-48D2-B959-95F2BB1F5DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E78FF2B-AABC-48D2-B959-95F2BB1F5DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E78FF2B-AABC-48D2-B959-95F2BB1F5DA8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9E78FF2B-AABC-48D2-B959-95F2BB1F5DA8} = {3EEF9DAB-A839-40AB-B67A-54A88D753B21}
+	EndGlobalSection
+EndGlobal
