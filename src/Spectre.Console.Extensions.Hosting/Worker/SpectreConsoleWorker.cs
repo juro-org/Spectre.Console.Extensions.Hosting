@@ -6,24 +6,26 @@ namespace Spectre.Console.Extensions.Hosting.Worker;
 
 public class SpectreConsoleWorker : IHostedService
 {
-    private readonly ILogger<SpectreConsoleWorker> _logger;
     private readonly ICommandApp _commandApp;
     private readonly IHostApplicationLifetime _hostLifetime;
-    private int _exitCode = 0;
+    private readonly ILogger<SpectreConsoleWorker> _logger;
+    private int _exitCode;
 
-    public SpectreConsoleWorker(ILogger<SpectreConsoleWorker> logger, ICommandApp commandApp, IHostApplicationLifetime hostLifetime)
+    public SpectreConsoleWorker(ILogger<SpectreConsoleWorker> logger, ICommandApp commandApp,
+        IHostApplicationLifetime hostLifetime)
     {
         _logger = logger;
         _commandApp = commandApp;
         _hostLifetime = hostLifetime;
     }
+
     public Task StartAsync(CancellationToken cancellationToken)
     {
         return Task.Factory.StartNew(async () =>
         {
             try
             {
-                var args = GetArgs(); 
+                var args = GetArgs();
                 await Task.Delay(100, cancellationToken); //Just to let Microsoft.Hosting finish.
                 _exitCode = await _commandApp.RunAsync(args);
             }
@@ -39,15 +41,15 @@ public class SpectreConsoleWorker : IHostedService
         }, cancellationToken);
     }
 
-    private static string[] GetArgs()
-    {
-        //Remove path from command line args
-        return Environment.GetCommandLineArgs().Skip(1).ToArray();
-    }
-
     public Task StopAsync(CancellationToken cancellationToken)
     {
         Environment.ExitCode = _exitCode;
         return Task.CompletedTask;
+    }
+
+    private static string[] GetArgs()
+    {
+        //Remove path from command line args
+        return Environment.GetCommandLineArgs().Skip(1).ToArray();
     }
 }

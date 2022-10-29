@@ -34,6 +34,6 @@ public sealed class TypeRegistrar : ITypeRegistrar
             throw new ArgumentNullException(nameof(func));
         }
 
-        _builder.AddSingleton(service, (provider) => func());
+        _builder.AddSingleton(service, provider => func());
     }
 }
