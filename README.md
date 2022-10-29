@@ -25,7 +25,8 @@ Install-Package Spectre.Console.Extensions.Hosting
 ```
 ## Usage
 
-In your application`s __Program.cs__ file, configure the SpectreConsole CommandApp:
+After the installation you can use the extension ```UseSpectreConsole``` for IHostBuilder.
+For this you must configure the SpectreConsole CommandApp in your application`s __Program.cs__ file:
 
 ```csharp
  public static async Task<int> Main(string[] args)
@@ -38,6 +39,24 @@ In your application`s __Program.cs__ file, configure the SpectreConsole CommandA
             .RunConsoleAsync();
         return Environment.ExitCode;
     }
+```
+
+It is also possible to customize the command configurations:
+
+```csharp
+    Host.CreateDefaultBuilder(args)
+        ...
+        .UseSpectreConsole(config =>
+        {
+            config.AddCommand<AddCommand>("add");
+            config.AddCommand<CommitCommand>("commit");
+            config.AddCommand<RebaseCommand>("rebase");
+#if DEBUG
+            config.PropagateExceptions();
+            config.ValidateExamples();
+#endif
+        })
+        ...
 ```
 
 ## Examples 
