@@ -37,4 +37,7 @@
     <PackageReference Include="Spectre.Console.Cli" Version="0.45.0"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="$(ProjectDir)../../README.md" Link="README.md" PackagePath="" Pack="true" />
+  </ItemGroup>
 </Project>
