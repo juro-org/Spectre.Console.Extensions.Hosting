@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace Sample;
+namespace SingleCommand;
 
 public interface IGreeter
 {

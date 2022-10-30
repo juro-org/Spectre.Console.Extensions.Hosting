@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Spectre.Console.Cli;
 
-namespace Sample.Commands;
+namespace SingleCommand.Commands;
 
 public sealed class DefaultCommand : Command<DefaultCommand.Settings>
 {
@@ -12,7 +13,7 @@ public sealed class DefaultCommand : Command<DefaultCommand.Settings>
         _greeter = greeter ?? throw new ArgumentNullException(nameof(greeter));
     }
 
-    public override int Execute(CommandContext context, Settings settings)
+    public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
     {
         _greeter.Greet(settings.Name);
         return 0;
@@ -23,6 +24,6 @@ public sealed class DefaultCommand : Command<DefaultCommand.Settings>
         [CommandOption("-n|--name <NAME>")]
         [Description("The person or thing to greet.")]
         [DefaultValue("World")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 }

@@ -19,7 +19,7 @@ public sealed class TypeResolver : ITypeResolver, IDisposable
         }
     }
 
-    public object Resolve(Type type)
+    public object? Resolve(Type? type)
     {
         if (type == null)
         {
