@@ -84,7 +84,7 @@ Small note: If editing the Readme, please conform to the [standard-readme][] spe
 [contrib-covenantimg]: https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg
 [maintainer]: https://github.com/JuergenRB
 [nuget]: https://nuget.org/packages/Spectre.Console.Extensions.Hosting
-[nugetimage]: https://img.shields.io/nuget/v/Cake.Pandoc.svg?logo=nuget&style=flat-square
+[nugetimage]: https://img.shields.io/nuget/v/Spectre.Console.Extensions.Hosting.svg?logo=nuget&style=flat-square
 [license]: LICENSE.txt
 [standard-readme]: https://github.com/RichardLitt/standard-readme
 [standard-readme compliant]: https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square
