@@ -339,6 +339,8 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+.vshistory/
+.history/ 
 
 # BeatPulse healthcheck temp database
 healthchecksdb
@@ -348,3 +350,4 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+.idea/
