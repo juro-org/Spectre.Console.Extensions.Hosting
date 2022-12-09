@@ -27,7 +27,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       NUGET_SOURCE: ${{ secrets.NUGET_SOURCE }}
-      
+
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
@@ -42,20 +42,21 @@ jobs:
             3.1.x
             5.0.x
             6.0.x
-            
+            7.0.x
+
       - name: Cache Tools
         uses: actions/cache@v3
         with:
           path: tools
           key: ${{ runner.os }}-tools-${{ hashFiles('recipe.cake') }}
-          
+
       - name: Build project
         uses: cake-build/cake-action@v1
         with:
           script-path: recipe.cake
           target: CI
           cake-version: 1.3.0
-          
+
       - name: Upload Issues
         uses: actions/upload-artifact@v3
         with:
@@ -64,7 +65,7 @@ jobs:
           path: |
             BuildArtifacts/report.html
             BuildArtifacts/**/coverlet/*.xml
-            
+
       - name: Upload Packages
         uses: actions/upload-artifact@v3
         if: runner.os == 'Windows'
