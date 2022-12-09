@@ -1,19 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net7.0;net6.0;netstandard2.0</TargetFrameworks>
     <LangVersion>10</LangVersion>
     <ImplicitUsings>true</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>Spectre.Console.Extensions.Hosting</RootNamespace>
   </PropertyGroup>
-
   <PropertyGroup>
     <StartYear>2022</StartYear>
     <EndYear>$([System.DateTime]::Today.Year)</EndYear>
     <FullYear Condition="'$(StartYear)'=='$(EndYear)'">$(StartYear)</FullYear>
     <FullYear Condition="'$(StartYear)'!='$(EndYear)'">$(StartYear)-$(EndYear)</FullYear>
-
     <!-- Properties related to packaging -->
     <Title>Spectre.Console.Extensions.Hosting</Title>
     <Authors>Jürgen Rosenthal-Buroh</Authors>
@@ -21,12 +19,11 @@
     <Description>Extension of IHostBuilder. Allows to use Spectre Console with IHostService and ServiceCollection of the host.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/juro-org/Spectre.Console.Extensions.Hosting</PackageProjectUrl>
-    <PackageTags>spectre.console;hosting;console</PackageTags>
+    <PackageTags>spectre.console;spectre;console;cli;commandline;hosting;di;dependency;injection</PackageTags>
     <RepositoryUrl>https://github.com/juro-org/Spectre.Console.Extensions.Hosting.git</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>https://github.com/juro-org/Spectre.Console.Extensions.Hosting/releases/tag/$(Version)</PackageReleaseNotes>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
@@ -36,7 +33,6 @@
     <PackageReference Include="Spectre.Console" Version="0.45.0" PrivateAssets="all" />
     <PackageReference Include="Spectre.Console.Cli" Version="0.45.0" PrivateAssets="all" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="$(ProjectDir)../../README.md" Link="README.md" PackagePath="" Pack="true" />
   </ItemGroup>
