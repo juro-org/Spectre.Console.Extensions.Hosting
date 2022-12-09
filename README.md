@@ -62,7 +62,31 @@ It is also possible to customize the command configurations:
 ## Examples 
 
 Examples are located in the [samples] folder. 
-It is planned to further adopt CLI examples from [Spectre.Console].
+
+For an overview or to run the examples [dotnet-example](https://github.com/patriksvensson/dotnet-example) can be used.
+First install it
+
+```
+> dotnet tool restore
+```
+
+Now you can list available examples in this repository:
+
+```
+> dotnet example
+```
+
+And to run an example:
+
+```
+> dotnet example "Single command"
+```
+
+Or show the source code:
+
+```
+> dotnet example "Single command" --source
+```
 
 ## Maintainer
 

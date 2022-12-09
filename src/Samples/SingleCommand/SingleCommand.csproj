@@ -2,10 +2,16 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>SingleCommand</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Label="dotnet-example">
+    <ExampleTitle>Single command</ExampleTitle>
+    <ExampleDescription>Demonstrates how to use dependency injection with a single command.</ExampleDescription>
+    <ExampleOrder>1</ExampleOrder>
   </PropertyGroup>
 
   <PropertyGroup Label="Settings">
