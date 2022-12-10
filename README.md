@@ -94,7 +94,7 @@ Or show the source code:
 
 ## Contributing
 
-pectre.Console.Extensions.Hosting follows the [Contributor Covenant][contrib-covenant] Code of Conduct.
+Spectre.Console.Extensions.Hosting follows the [Contributor Covenant][contrib-covenant] Code of Conduct.
 
 We accept Pull Requests.
 
