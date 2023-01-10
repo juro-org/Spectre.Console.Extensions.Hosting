@@ -31,7 +31,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Spectre.Console" Version="0.46.0" PrivateAssets="all" />
-    <PackageReference Include="Spectre.Console.Cli" Version="0.45.0" PrivateAssets="all" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.46.0" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ProjectDir)../../README.md" Link="README.md" PackagePath="" Pack="true" />
