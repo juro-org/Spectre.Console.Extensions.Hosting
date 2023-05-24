@@ -21,7 +21,7 @@ jobs:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     strategy:
       matrix:
-        os: [ windows-2019, ubuntu-18.04, macos-11 ]
+        os: [ windows-2022, ubuntu-22.04, macos-12 ]
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
