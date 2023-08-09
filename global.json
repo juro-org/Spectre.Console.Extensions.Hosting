@@ -2,7 +2,7 @@
   "projects": [ "src" ],
   "sdk": {
     "allowPrerelease": true,
-    "version": "7.0.306",
+    "version": "7.0.400",
     "rollForward": "latestFeature"
   }
 }
