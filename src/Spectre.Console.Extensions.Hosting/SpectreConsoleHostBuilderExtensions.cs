@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Spectre.Console.Cli;
 using Spectre.Console.Extensions.Hosting.Infrastructure;
@@ -24,10 +24,16 @@ public static class SpectreConsoleHostBuilderExtensions
 
         builder.ConfigureServices((_, collection) =>
             {
-                var command = new CommandApp(new TypeRegistrar(collection));
-                command.Configure(configureCommandApp);
-                collection.AddSingleton<ICommandApp>(command);
-                collection.AddHostedService<SpectreConsoleWorker>();
+                collection.AddSingleton<ICommandApp>(sp =>
+                {
+                    var scope = sp.CreateScope();
+                    var registrar = TieredTypeRegistrar.FromServices(scope.ServiceProvider);
+
+                    var command = new CommandApp(registrar);
+                    command.Configure(configureCommandApp);
+
+                    return command;
+                });
             }
         );
 
@@ -50,13 +56,20 @@ public static class SpectreConsoleHostBuilderExtensions
 
         builder.ConfigureServices((_, collection) =>
             {
-                var command = new CommandApp<TDefaultCommand>(new TypeRegistrar(collection));
-                if (configureCommandApp != null)
+                collection.AddSingleton<ICommandApp>(sp =>
                 {
-                    command.Configure(configureCommandApp);
-                }
+                    var scope = sp.CreateScope();
+                    var registrar = TieredTypeRegistrar.FromServices(scope.ServiceProvider);
 
-                collection.AddSingleton<ICommandApp>(command);
+                    var command = new CommandApp<TDefaultCommand>(registrar);
+                    if (configureCommandApp != null)
+                    {
+                        command.Configure(configureCommandApp);
+                    }
+
+                    return command;
+                });
+
                 collection.AddHostedService<SpectreConsoleWorker>();
             }
         );

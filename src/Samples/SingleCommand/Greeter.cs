@@ -1,4 +1,4 @@
-﻿using Spectre.Console;
+using Spectre.Console;
 
 namespace SingleCommand;
 
@@ -11,6 +11,7 @@ public sealed class HelloWorldGreeter : IGreeter
 {
     public void Greet(string name)
     {
-        AnsiConsole.WriteLine($"Hello {name}!");
+        var time = Program.Stopwatch.Elapsed.TotalMilliseconds;
+        AnsiConsole.MarkupLine($"[yellow]Hello[/] [green]{name}[/]! [grey](in {time}ms)[/]");
     }
 }
