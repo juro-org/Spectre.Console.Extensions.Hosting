@@ -21,15 +21,14 @@ public static class SpectreConsoleHostBuilderExtensions
     public static IHostBuilder UseSpectreConsole(this IHostBuilder builder, Action<IConfigurator> configureCommandApp)
     {
         builder = builder ?? throw new ArgumentNullException(nameof(builder));
+        var command = new HostEnabledCommandApp(new TypeRegistrar(builder));
+        command.Configure(configureCommandApp);
 
         builder.ConfigureServices((_, collection) =>
-            {
-                var command = new CommandApp(new TypeRegistrar(collection));
-                command.Configure(configureCommandApp);
-                collection.AddSingleton<ICommandApp>(command);
-                collection.AddHostedService<SpectreConsoleWorker>();
-            }
-        );
+        {
+            collection.AddSingleton<IHostEnabledCommandApp>(command);
+            collection.AddHostedService<SpectreConsoleWorker>();
+        });
 
         return builder;
     }
@@ -48,18 +47,17 @@ public static class SpectreConsoleHostBuilderExtensions
     {
         builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
-        builder.ConfigureServices((_, collection) =>
-            {
-                var command = new CommandApp<TDefaultCommand>(new TypeRegistrar(collection));
-                if (configureCommandApp != null)
-                {
-                    command.Configure(configureCommandApp);
-                }
+        var command = new HostEnabledCommandApp<TDefaultCommand>(new TypeRegistrar(builder));
+        if (configureCommandApp != null)
+        {
+            command.Configure(configureCommandApp);
+        }
 
-                collection.AddSingleton<ICommandApp>(command);
-                collection.AddHostedService<SpectreConsoleWorker>();
-            }
-        );
+        builder.ConfigureServices((_, collection) =>
+        {
+            collection.AddSingleton<IHostEnabledCommandApp>(command);
+            collection.AddHostedService<SpectreConsoleWorker>();
+        });
 
         return builder;
     }
