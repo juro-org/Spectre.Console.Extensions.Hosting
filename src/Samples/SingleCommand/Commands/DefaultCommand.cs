@@ -13,7 +13,7 @@ public sealed class DefaultCommand : Command<DefaultCommand.Settings>
         _greeter = greeter ?? throw new ArgumentNullException(nameof(greeter));
     }
 
-    public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
+    public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings, [NotNull] CancellationToken cancellationToken)
     {
         _greeter.Greet(settings.Name);
         return 0;
