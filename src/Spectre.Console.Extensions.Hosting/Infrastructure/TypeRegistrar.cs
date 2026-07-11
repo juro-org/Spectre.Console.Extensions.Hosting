@@ -1,19 +1,49 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Spectre.Console.Cli;
 
 namespace Spectre.Console.Extensions.Hosting.Infrastructure;
 
 public sealed class TypeRegistrar : ITypeRegistrar
 {
-    private readonly IServiceCollection _builder;
+    private readonly IServiceCollection _builder = new ServiceCollection();
+    private IServiceCollection _hostServiceCollection = null!;
+    private IHost? _host;
 
-    public TypeRegistrar(IServiceCollection builder)
+    public TypeRegistrar(IHostBuilder builder)
     {
-        _builder = builder;
+        builder.ConfigureServices((_, serviceCollection) =>
+        {
+            _hostServiceCollection = serviceCollection;
+        });
+    }
+
+    public void SetHost(IHost host)
+    {
+        _host = host;
     }
 
     public ITypeResolver Build()
     {
+        if (_host == null)
+        {
+            throw new NotSupportedException("SetHost must be called before the Resolver can be accessed.");
+        }
+
+        // copy all registrations from the host ServiceCollection to our internal ServiceCollection,
+        // so we have them all available, but do not modify the host ServiceCollection ourselves.
+        foreach (var serviceDescriptor in _hostServiceCollection)
+        {
+            var type = serviceDescriptor.ServiceType;
+            if (serviceDescriptor.ImplementationType != null)
+            {
+                _builder.AddSingleton(type, serviceDescriptor.ImplementationType);
+                continue;
+            }
+
+            _builder.AddSingleton(type, _ => _host.Services.GetService(type)!);
+        }
+
         return new TypeResolver(_builder.BuildServiceProvider());
     }
 

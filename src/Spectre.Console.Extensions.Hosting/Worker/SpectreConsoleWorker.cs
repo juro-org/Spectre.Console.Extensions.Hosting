@@ -1,22 +1,27 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Spectre.Console.Cli;
+using Spectre.Console.Extensions.Hosting.Infrastructure;
 
 namespace Spectre.Console.Extensions.Hosting.Worker;
 
 public class SpectreConsoleWorker : IHostedService
 {
-    private readonly ICommandApp _commandApp;
+    private readonly IHostEnabledCommandApp _commandApp;
     private readonly IHostApplicationLifetime _hostLifetime;
+    private readonly IHost _host;
     private readonly ILogger<SpectreConsoleWorker> _logger;
     private int _exitCode;
 
-    public SpectreConsoleWorker(ILogger<SpectreConsoleWorker> logger, ICommandApp commandApp,
-        IHostApplicationLifetime hostLifetime)
+    public SpectreConsoleWorker(
+        ILogger<SpectreConsoleWorker> logger,
+        IHostEnabledCommandApp commandApp,
+        IHostApplicationLifetime hostLifetime,
+        IHost host)
     {
         _logger = logger;
         _commandApp = commandApp;
         _hostLifetime = hostLifetime;
+        _host = host;
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
@@ -26,6 +31,7 @@ public class SpectreConsoleWorker : IHostedService
             try
             {
                 var args = GetArgs();
+                _commandApp.SetHost(_host);
                 await Task.Delay(100, cancellationToken); //Just to let Microsoft.Hosting finish.
                 _exitCode = await _commandApp.RunAsync(args);
             }
