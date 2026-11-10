@@ -21,7 +21,7 @@ jobs:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     strategy:
       matrix:
-        os: [ windows-2022, ubuntu-22.04, macos-12 ]
+        os: [ windows-2022, ubuntu-24.04, macos-14 ]
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -30,12 +30,12 @@ jobs:
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
 
       - name: Fetch all tags and branches
         run: git fetch --prune --unshallow
 
-      - uses: actions/setup-dotnet@v3.4.2
+      - uses: actions/setup-dotnet@v4.1.0
         with:
           dotnet-version: |
             2.1.818
@@ -43,22 +43,25 @@ jobs:
             5.0.x
             6.0.x
             7.0.x
+            8.0.x
+            9.0.x
+            10.0.x
 
       - name: Cache Tools
-        uses: actions/cache@v3
+        uses: actions/cache@v4.1.0
         with:
           path: tools
           key: ${{ runner.os }}-tools-${{ hashFiles('recipe.cake') }}
 
       - name: Build project
-        uses: cake-build/cake-action@v1
+        uses: cake-build/cake-action@v3.0.1
         with:
           script-path: recipe.cake
           target: CI
           cake-version: 1.3.0
 
       - name: Upload Issues
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.3
         with:
           if-no-files-found: warn
           name: ${{ matrix.os }} Issues
@@ -67,7 +70,7 @@ jobs:
             BuildArtifacts/**/coverlet/*.xml
 
       - name: Upload Packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.3
         if: runner.os == 'Windows'
         with:
           if-no-files-found: warn

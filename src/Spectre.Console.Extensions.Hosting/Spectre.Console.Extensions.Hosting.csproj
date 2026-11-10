@@ -1,12 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0;net6.0;netstandard2.0</TargetFrameworks>
-    <LangVersion>10</LangVersion>
+    <TargetFrameworks>net10.0;net9.0;net8.0;net7.0;net6.0;netstandard2.0</TargetFrameworks>
     <ImplicitUsings>true</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>Spectre.Console.Extensions.Hosting</RootNamespace>
   </PropertyGroup>
+  <Choose>
+    <When Condition="'$(TargetFramework)' == 'netstandard2.0'">
+      <PropertyGroup>
+        <LangVersion>10</LangVersion>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <LangVersion>default</LangVersion>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
   <PropertyGroup>
     <StartYear>2022</StartYear>
     <EndYear>$([System.DateTime]::Today.Year)</EndYear>
